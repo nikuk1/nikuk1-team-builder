@@ -100,3 +100,4 @@ class Character {
         agility: this.agility
       };
     }
+//:::examples End
