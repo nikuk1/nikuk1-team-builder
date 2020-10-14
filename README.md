@@ -14,7 +14,9 @@ Because this application won’t be deployed, you’ll also need to provide a li
 * [Installation](#installation)
 * [Usage](#usage)
 * [Contributing](#contributing)
+* [Credits](#credits)
 * [License](#license)
+
 
 ## Installation
 
