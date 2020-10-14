@@ -1,6 +1,7 @@
 # Team Profile Generator
 
 ## Description 
+
 This idea was introduced to me by U of A's web development boot camp program.
 I am expected to achieve the expected result.
 
@@ -13,10 +14,12 @@ Because this application won’t be deployed, you’ll also need to provide a li
 * [Description](#description)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Contributing](#contributing)
 * [Credits](#credits)
 * [License](#license)
-
+* [Badges](#badges)
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Tips](#tips)
 
 ## Installation
 
@@ -42,7 +45,8 @@ None
 
 ## Contributing
 ## Tests
-## Creating a README tips
+## Tips
+_Creating a README_
 Description:
 Explain the What, why, and how. What was your motivation? Why did you build this project? What problem does it solve? What did you learn? What makes your project stand out? If your project has a lot of features, consider adding a heading called "Features" and listing them here.
 <br />
