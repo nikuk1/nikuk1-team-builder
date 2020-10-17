@@ -4,100 +4,119 @@
 // src/                // template helper code
 // Index.js            // runs the application
 
-// The application must have these classes: 
+//globabl variables
+// create objects from respective exported functions
+const inquirer = require('inquirer');
+const createHtml = require('./dynamics/createHtml.js');
+const writeHTML = require('./dynamics/writeHtml.js');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
+const Manager = require('./lib/Manager.js');
+//empty array to store team member objects
+var teamList = [];
 
-class Employee {
-
-    name
-
-    id
-    
-    email
-    
-    getName()
-    
-    getId()
-    
-    getEmail()
-    
-    getRole() // Returns 'Employee'
-
+// function to gather data
+function promptUser() {
+//Instructions
+  console.log
+  ("Instructions:\n" +
+  "A series of prompts---\n" +
+  "Please type an answer in the console for each question, and press enter.\n" +
+  "If you do not have a response, just press Enter to skip" +
+  "Find the results in your dist folder!");
+//prompt the user
+return inquirer.prompt([
+{
+type: 'input',
+name: 'name',
+message: 'What is the full legal name of your team member?'
+},
+{
+type: 'input',
+name: 'email',
+message: 'If they have an email address, please enter it.'
+},
+{
+type: 'list',
+name: 'role',
+message: 'Choose the role of this team member!',
+choices: ['Engineer', 'Intern', 'Manager']
 }
-
-class Manager extends Employee {
-
-    In addition to Employee's properties and methods, Manager will also have:
-
-    officeNumber
-    
-    getRole() // Overridden to return 'Manager'
-
-}
-
-class Engineer extends Employee {
-
-    In addition to Employee's properties and methods, Intern will also have:
-
-    github // GitHub username
-
-    getGithub()
-    
-    getRole() // Overridden to return 'Engineer'
-    
-    
-
-}
-
-class Intern extends Employee {
-
-In addition to Employee's properties and methods, Intern will also have:
-
-    school
-
-    getSchool()
-    
-    getRole() // Overridden to return 'Intern'
-
-}
-
-Finally, although it’s not a requirement, you should consider adding validation to ensure that user input provided is in the proper expected format.
+]);   
+};
 
 
-//EXAMPLES:::
-
-class Character {
-    constructor(name = '') {
-      this.name = name;
-      this.health = Math.floor(Math.random() * 10 + 95);
-      this.strength = Math.floor(Math.random() * 5 + 7);
-      this.agility = Math.floor(Math.random() * 5 + 7);
-    }
-  isAlive() {
-    if (this.health === 0) {
-      return false;
-    }
-    return true;
+//function to handle question selection based on team member's role
+function Role(employee) {
+  //Engineer
+  if (employee.role === 'Engineer') {
+    return inquirer.prompt([
+    {
+    type: 'input',
+    name: 'github',
+    message: 'What is their Github username?'
+    }]).then(github => {
+        const engineer = new Engineer(employee.name, (teamList.length + 1), employee.email, github.github);
+        //push new team member to end of global array
+        teamList.push(engineer);
+    });
+  //Intern
+  } else if (employee.role === 'Intern') {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'school',
+      message: 'What school does this intern attend?'
+    }]).then(school => {
+        const intern = new Intern(employee.name, (teamList.length + 1), employee.email, school.school);
+        //push new team member to end of global array
+        teamList.push(intern);
+    });
+  //Manager
+  } else if (employee.role === 'Manager') {
+    return inquirer.prompt([
+        {
+          type: 'input',
+          name: 'officeNumber',
+          message: 'What is their office number?'
+        }]).then(officeNumber => {
+            const manager = new Manager(employee.name, (teamList.length + 1), employee.email, officeNumber.officeNumber);
+            //push new team member to end of global array
+            teamList.push(manager);
+        });
   }
-//examples Continued:::
+};
 
-  const Potion = require('../lib/Potion');
+//function to re-start if (y/n)
+function runAgain() {
+  inquirer.prompt([
+  {
+  type: 'confirm',
+  name: 'add',
+  message: 'Would you like to add another team member?',
+  default: false
+  }]).then(add => {
+    if (add.add) {
+        //run it back, BUT, do not re-display instructions
+        return runApp();
+    } else {
+          return writeHTML(createHtml(teamList));
+    }
+  });
+};
 
-  const Character = require('./Character');
-  
-  class Player extends Character {
-    constructor(name = '') {
-      // call parent constructor here:
-      super(name);
-  
-      this.inventory = [new Potion('health'), new Potion()];
-    }
-  
-    getStats() {
-      return {
-        potions: this.inventory.length,
-        health: this.health,
-        strength: this.strength,
-        agility: this.agility
-      };
-    }
-//:::examples End
+// prompt user to add more or stop
+function runApp() {
+promptUser()
+.then(employeeInfo => {
+return Role(employeeInfo);
+}).then(newEmployee => {
+return runAgain();
+});
+};
+
+//let's do this
+runApp();
+
+//Future Improvements
+// 1.) fix the re-display instructions to NOT display after selecting Yes option in runAgain()

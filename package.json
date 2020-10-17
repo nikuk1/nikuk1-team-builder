@@ -1,0 +1,27 @@
+{
+  "name": "nikuk1-team-builder",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "Index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "jest": "^26.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikuk1/nikuk1-team-builder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikuk1/nikuk1-team-builder/issues"
+  },
+  "homepage": "https://github.com/nikuk1/nikuk1-team-builder#readme"
+}
