@@ -10,7 +10,7 @@ Because this application won’t be deployed, you’ll also need to provide a li
 
 ### Snap
 
-![Screen Shot 2020-10-16 at 6 58 53 PM](https://user-images.githubusercontent.com/65746547/96326009-f48ef580-0fe1-11eb-82ae-6f95f0cfb647.png)
+![./assets/img/team-builder.png]
 
 ## Table of Contents 
 * [Description](#description)
